@@ -172,11 +172,15 @@ T26 → T27 → T28
 **Requirement**: MAP-08..11, EDGE-03
 
 **Done when**:
-- [ ] Tests: linhabranca → [5,7,9,10]; "pampulha" → [7,8]; linhabranca+"pampulha" → [7]; "xyz" → []; "lampada" and "efigenia" match accented data
-- [ ] Gate passes: Quick
+- [x] Tests: linhabranca → [5,7,9,10]; "pampulha" → [7,8]; linhabranca+"pampulha" → [7]; "xyz" → []; "lampada" and "efigenia" match accented data
+- [x] Gate passes: Quick
 
 **Tests**: unit · **Gate**: quick
 **Commit**: `feat(logic): add accent-insensitive point filtering`
+
+**Notes**: `normalize()` lives in `filter.ts` (task spec), not a separate `normalize.ts` as the design table says. Query is trimmed before matching.
+
+**Status**: ✅ Complete
 
 ---
 
