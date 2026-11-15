@@ -551,11 +551,15 @@ T26 → T27 → T28
 **Where**: `src/screens/Profile.tsx` · **Depends on**: T24 · **Requirement**: PROF-01..07, NAV-01..03 (S17–S18)
 
 **Done when**:
-- [ ] E2e: empty state + button to the map; after booking 2 celulares → "Itens agendados: 2" and the booking listed; potential totals; Sair → login → login again skips onboarding; Reiniciar demo confirm → onboarding after login; Cancelar keeps data
-- [ ] Gate passes: Full
+- [x] E2e: empty state + button to the map; after booking 2 celulares → "Itens agendados: 2" and the booking listed; potential totals; Sair → login → login again skips onboarding; Reiniciar demo confirm → onboarding after login; Cancelar keeps data
+- [x] Gate passes: Full
 
 **Tests**: e2e · **Gate**: full
 **Commit**: `feat(screens): add profile with bookings, logout and demo reset`
+
+**Notes**: `ProfileScreen({name, bookings, onOpenMap, onLogout, onReset, initialConfirmOpen?})` in `src/screens/Profile.tsx`. Screen-local state: the reset confirmation (gallery can open it with `initialConfirmOpen`). "Itens agendados" = sum of booked quantities; `sumImpact` totals with Fonte under "Impacto potencial" (PROF-06) or, with no multipliable sub-type, "Seus itens vão para a reciclagem certa" with one qualitative fact per category (PROF-07). The confirmation is an `alertdialog` that stays in view when Perfil is scrolled. Adapters: "Agende seu primeiro descarte" → `openMap` (no handoff), "Sair" → `logout`, "Apagar" → `resetDemo`. The unused `placeholder` helper was removed from `Navigator.tsx` (every screen now has an adapter). Phase 4 Build gate: 243 unit/component + 71 e2e (8 new).
+
+**Status**: ✅ Complete
 
 ---
 
