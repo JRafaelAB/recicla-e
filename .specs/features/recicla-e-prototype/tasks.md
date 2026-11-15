@@ -432,11 +432,15 @@ T26 → T27 → T28
 **Requirement**: AUTH-01, AUTH-02, NAV-01
 
 **Done when**:
-- [ ] E2e: a fresh open shows the login placeholder; with a saved session the home placeholder shows; the 390×844 frame is present
-- [ ] Gate passes: Full
+- [x] E2e: a fresh open shows the login placeholder; with a saved session the home placeholder shows; the 390×844 frame is present
+- [x] Gate passes: Full
 
 **Tests**: e2e · **Gate**: full
 **Commit**: `feat(app): add phone frame and screen navigator`
+
+**Notes**: `Navigator` renders `SCREENS[top(state).screen](ctx)` inside `PhoneFrame`, where `ctx = {state, dispatch, params, now}` and `SCREENS: Record<ScreenId, ScreenRenderer>`. Phase 4 replaces each placeholder entry with an adapter that maps the store to its pure screen component. Placeholders have test id `screen-{ScreenId}` and an `<h1>`. `tabFor(state)` shows the TabBar only when logged in, onboarding done and the top screen is home/learn/profile (NAV-01, ONB-03); tab taps dispatch `switchTab`. `main.tsx` mounts `<AppProvider><Navigator/></AppProvider>` (StrictMode) and `index.html` now loads it. `PhoneFrame({children, footer?})` is 390×844 with a status bar and a scrollable `.phone-screen`; test id `phone-frame`. E2e: 5 new tests in `e2e/app.spec.ts` (fresh → login; saved session → home + tab bar; session without onboarding → onboarding, no tab bar; tab switching; frame size). Phase 3 Build gate: 240 unit/component + 7 e2e.
+
+**Status**: ✅ Complete
 
 ---
 

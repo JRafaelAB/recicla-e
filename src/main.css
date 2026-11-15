@@ -1,0 +1,2 @@
+body { background: radial-gradient(circle at 30% 20%, #e9fbd9 0%, #cdeeb4 45%, #a9dc87 100%); min-height: 100vh; }
+.app-page { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 32px 16px; }

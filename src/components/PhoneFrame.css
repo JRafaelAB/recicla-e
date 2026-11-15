@@ -1,0 +1,38 @@
+.phone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 390px;
+  height: 844px;
+  flex: none;
+  overflow: hidden;
+  border-radius: 48px;
+  background: #fff;
+  box-shadow: 0 0 0 10px #1f1f1f, 0 0 0 12px #3a3a3a, 0 24px 60px rgba(0, 0, 0, 0.25);
+  font-family: var(--font);
+  color: var(--ink);
+}
+.phone-status {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 47px;
+  flex: none;
+  padding: 0 28px 0 36px;
+  font-size: 16px;
+  font-weight: 800;
+}
+.phone-notch {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 120px;
+  height: 32px;
+  margin-left: -60px;
+  border-radius: 20px;
+  background: #111;
+}
+.phone-icons { display: inline-flex; align-items: center; gap: 6px; fill: currentColor; color: var(--ink); }
+.phone-screen { position: relative; flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; }
+.phone-footer { flex: none; }
