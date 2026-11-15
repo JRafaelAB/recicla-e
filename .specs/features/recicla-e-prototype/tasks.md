@@ -601,11 +601,13 @@ T26 → T27 → T28
 **Where**: `e2e/goals.spec.ts` · **Depends on**: T27 · **Requirement**: Goals 1–2, NFR-01
 
 **Done when**:
-- [ ] Tap counts asserted; zero non-`file:` requests across the full flow
-- [ ] Gate passes: Full
+- [x] Tap counts asserted; zero non-`file:` requests across the full flow
+- [x] Gate passes: Full
 
 **Tests**: e2e · **Gate**: full
 **Commit**: `test(e2e): add goal tap-count and offline acceptance tests`
+
+**Status**: ✅ Complete
 
 ---
 
