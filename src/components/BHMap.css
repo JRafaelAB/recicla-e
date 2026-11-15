@@ -1,0 +1,22 @@
+.bhmap { display: block; width: 100%; height: 100%; background: #eef8e1; user-select: none; }
+.bhmap text { font-family: var(--font); paint-order: stroke; stroke: #fff; stroke-linejoin: round; }
+.bhmap text:not([text-anchor]) { text-anchor: middle; }
+.bhmap-hood { font-size: 2.6px; font-weight: 800; fill: #4b4b4b; stroke-width: 0.8px; }
+.bhmap-hood-user { fill: #1899d6; }
+.bhmap-water { font-size: 2.5px; font-weight: 800; font-style: italic; fill: #2a9fd6; stroke-width: 0.7px; }
+.bhmap-mountain { font-size: 2.6px; font-weight: 800; fill: #4e8a2e; stroke: #c9e8b3; stroke-width: 0.7px; }
+.bhmap-road { font-size: 1.9px; font-weight: 700; fill: #a37b00; stroke: #fff7d6; stroke-width: 0.5px; }
+.bhmap-compass-n { font-size: 2.2px; font-weight: 900; fill: #3c3c3c; stroke: none; }
+.bhmap-pin { cursor: pointer; outline: none; transition: transform 0.15s; }
+.bhmap-pin:focus-visible path { stroke: #1cb0f6; stroke-width: 1px; }
+.bhmap-pin-emoji { font-size: 3px; dominant-baseline: middle; stroke: none; }
+.bhmap-pin-on path { stroke: #3c3c3c; }
+.bhmap-pulse { transform-box: fill-box; transform-origin: center; animation: bh-pulse 1.8s ease-out infinite; }
+@keyframes bh-pulse { 0% { transform: scale(0.8); opacity: 0.55; } 100% { transform: scale(2.6); opacity: 0; } }
+.bhmap-route-dash { animation: bh-dash 1.2s linear infinite; }
+@keyframes bh-dash { to { stroke-dashoffset: -8; } }
+.bhmap-target { transform-box: fill-box; transform-origin: center; animation: bh-pulse 1.8s ease-out infinite; }
+.bhmap-mini { border-radius: var(--radius); }
+@media (prefers-reduced-motion: reduce) {
+  .bhmap-pulse, .bhmap-route-dash, .bhmap-target { animation: none; }
+}

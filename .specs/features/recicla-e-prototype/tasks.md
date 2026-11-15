@@ -392,11 +392,15 @@ T26 → T27 → T28
 **Requirement**: MAP-01, ONB-10, PT-06
 
 **Done when**:
-- [ ] Tests: renders exactly the given pins and user dot; clicking a pin calls back with its id; the route path is present only when `routeTo` is set
-- [ ] Gate passes: Quick
+- [x] Tests: renders exactly the given pins and user dot; clicking a pin calls back with its id; the route path is present only when `routeTo` is set
+- [x] Gate passes: Quick
 
 **Tests**: component · **Gate**: quick
 **Commit**: `feat(ui): add illustrated belo horizonte map`
+
+**Notes**: Props `{points, onPinClick?, routeTo? (point id), mini?, highlight? (CategoryId[]), selectedId?}`. viewBox `0 -8 100 106` over the 0–100 point coordinates; the `mini` variant zooms its viewBox to the pins + user dot and hides labels. Pins are `role=button` groups with test id `pin-{id}`, named "{name}, {neighborhood}", and respond to click and Enter. Pin emoji/color: the first `highlight` category the point accepts, else ♻️ green. Route: test id `route`, dashed quadratic path from `USER_LOCATION` to the point. User dot: test id `user-dot`, pulsing. Landmarks: Lagoa da Pampulha, Serra do Curral, Av. Afonso Pena, Av. do Contorno, Av. Antônio Carlos, Av. Cristiano Machado, Av. Amazonas; one label per neighborhood plus Funcionários. Gate: 231 tests.
+
+**Status**: ✅ Complete
 
 ---
 
