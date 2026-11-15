@@ -332,11 +332,15 @@ T26 → T27 → T28
 **Requirement**: AUTH-02, AUTH-07..11, ONB-04..09, ONB-12..13, NAV-02..03, PROF-03..05, SCH-07
 
 **Done when**:
-- [ ] Reducer tests: login routes to onboarding or home; signup stores name; answerCard; skip; navigate/back keeps map state; book; logout keeps data; resetDemo clears
-- [ ] Gate passes: Quick
+- [x] Reducer tests: login routes to onboarding or home; signup stores name; answerCard; skip; navigate/back keeps map state; book; logout keeps data; resetDemo clears
+- [x] Gate passes: Quick
 
 **Tests**: unit · **Gate**: quick
 **Commit**: `feat(app): add app store with persistence and navigation stack`
+
+**Notes**: Extra actions beyond the design list: `switchTab(home|learn|profile)` (replaces the stack with the tab root), `openMap(handoff?)` (ONB-08/12/13, NAV-03, PROF-02, INFO-06), `dismissTip`. `book` replaces the schedule entry with `celebration {bookingId}`, so back from the celebration returns to the point detail. Answering the 8th card sets `onboarding.done` and opens `onboardingSummary`; the current card = first unanswered category. `ClockContext`/`useClock` live in `store.tsx` (task), not `clock.ts` (design). The provider clears the storage key when the persisted slice equals the defaults (PROF-05). Spec-precision gap: TIP-02 "until the home map is opened again". Chosen: tab switch to Mapa or `openMap` reopens the tip; `back` from a point detail does not. Gate: 200 unit/component tests.
+
+**Status**: ✅ Complete
 
 ---
 
