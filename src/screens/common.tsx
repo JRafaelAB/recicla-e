@@ -20,12 +20,13 @@ export function ScreenHeader({ title, onBack, right }: { title: string; onBack: 
 }
 
 /** Section heading with an optional ⓘ (TIP-03). */
-export function SectionTitle({ children, info }: { children: ReactNode; info?: ReactNode }) {
+export function SectionTitle({ children, info, level = 2 }: { children: ReactNode; info?: ReactNode; level?: 2 | 3 }) {
+  const H = level === 3 ? 'h3' : 'h2'
   return (
-    <h2 className="scr-section">
+    <H className="scr-section">
       <span>{children}</span>
       {info}
-    </h2>
+    </H>
   )
 }
 

@@ -1,4 +1,4 @@
-import type { Dispatch, ReactNode } from 'react'
+import { useLayoutEffect, useRef, type Dispatch, type ReactNode } from 'react'
 import { PhoneFrame } from '../components/PhoneFrame'
 import { TabBar } from '../components/ui'
 import { CATEGORIES } from '../data/categories'
@@ -8,6 +8,7 @@ import { OnboardingScreen, OnboardingSummaryScreen } from '../screens/Onboarding
 import { HomeMapScreen } from '../screens/HomeMap'
 import { PointDetailScreen, RouteScreen } from '../screens/Point'
 import { CelebrationScreen, ScheduleScreen } from '../screens/Schedule'
+import { DeviceScreen, LearnScreen } from '../screens/Learn'
 import { MAIN_SCREENS, top, useApp, useClock, type Action, type AppState, type MainScreen, type NavEntry, type ScreenId } from './store'
 
 /** What a screen adapter receives: the live state, dispatch, its nav params and the clock. */
@@ -104,8 +105,14 @@ export const SCREENS: Record<ScreenId, ScreenRenderer> = {
     const booking = state.bookings.find((b) => b.id === params?.bookingId)
     return booking ? <CelebrationScreen booking={booking} onBackToMap={() => dispatch({ type: 'openMap' })} /> : null
   },
-  learn: placeholder('learn', 'Aprender'),
-  device: placeholder('device', 'Aparelho'),
+  learn: ({ dispatch }) => <LearnScreen onOpenCategory={(categoryId) => dispatch({ type: 'navigate', screen: 'device', params: { categoryId } })} />,
+  device: ({ dispatch, params }) => (
+    <DeviceScreen
+      categoryId={params!.categoryId!}
+      onBack={() => dispatch({ type: 'back' })}
+      onSeePoints={() => dispatch({ type: 'openMap', handoff: { kind: 'category', categories: [params!.categoryId!] } })}
+    />
+  ),
   profile: placeholder('profile', 'Perfil'),
 }
 
@@ -123,8 +130,15 @@ export function Navigator() {
   const now = useClock()
   const entry = top(state)
   const tab = tabFor(state)
+  // The phone's scroll area is shared by all screens: each newly shown screen starts at the top.
+  const anchor = useRef<HTMLDivElement>(null)
+  useLayoutEffect(() => {
+    const scroller = anchor.current?.parentElement
+    if (scroller) scroller.scrollTop = 0
+  }, [entry])
   return (
     <PhoneFrame footer={tab ? <TabBar active={tab} onSelect={(screen) => dispatch({ type: 'switchTab', screen })} /> : null}>
+      <div ref={anchor} hidden />
       {SCREENS[entry.screen]({ state, dispatch, params: entry.params, now })}
     </PhoneFrame>
   )

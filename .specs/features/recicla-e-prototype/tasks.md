@@ -534,11 +534,15 @@ T26 → T27 → T28
 **Where**: `src/screens/Learn.tsx` · **Depends on**: T23 · **Requirement**: INFO-01..06, SCALE-02 (S15–S16)
 
 **Done when**:
-- [ ] E2e: 8 categories sorted by level desc then name; logística reversa card + URPV note; Lâmpadas page shows fluorescent 3 and LED 1 sections with Fonte; "Ver pontos de coleta" → map with points 1,3,7,8
-- [ ] Gate passes: Full
+- [x] E2e: 8 categories sorted by level desc then name; logística reversa card + URPV note; Lâmpadas page shows fluorescent 3 and LED 1 sections with Fonte; "Ver pontos de coleta" → map with points 1,3,7,8
+- [x] Gate passes: Full
 
 **Tests**: e2e · **Gate**: full
 **Commit**: `feat(screens): add learn tab and device pages`
+
+**Notes**: `LearnScreen({onOpenCategory})` and `DeviceScreen({categoryId, onBack, onSeePoints})` in `src/screens/Learn.tsx` (no screen-local state besides the ⓘ/scale balloons). Order `LEARN_ORDER`: level desc, then pt-BR name. Each list row has an open button plus its own compact scale (tap → justification, SCALE-03). The device page shows the category scale, then per sub-type (with its own title + scale when the category has more than one, INFO-04) the three guide sections, the stream, and the guide facts each with Fonte (guide texts contain no numbers, INFO-05); the ⓘ next to "Por que não guardar em casa" shows the sub-type's first catalog tip. `SectionTitle` gained `level` (h3 under a sub-type title). Navigator now resets the shared phone scroll area to the top whenever the nav entry changes (a new screen opened mid-scroll otherwise). Gate: 243 unit/component + 63 e2e (9 new).
+
+**Status**: ✅ Complete
 
 ---
 
