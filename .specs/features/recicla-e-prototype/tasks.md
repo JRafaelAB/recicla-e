@@ -272,11 +272,15 @@ T26 → T27 → T28
 **Requirement**: AUTH-04..06, AUTH-11
 
 **Done when**:
-- [ ] Tests assert the three exact error messages, valid cases, and `nameFromEmail("ana@x.com") === "ana"`
-- [ ] Gate passes: Quick
+- [x] Tests assert the three exact error messages, valid cases, and `nameFromEmail("ana@x.com") === "ana"`
+- [x] Gate passes: Quick
 
 **Tests**: unit · **Gate**: quick
 **Commit**: `feat(logic): add login and sign-up validation`
+
+**Notes**: Error map keys: `nome`, `email`, `password`; empty map = valid. Whitespace-only nome counts as empty.
+
+**Status**: ✅ Complete
 
 ---
 
