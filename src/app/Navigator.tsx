@@ -2,8 +2,10 @@ import type { Dispatch, ReactNode } from 'react'
 import { PhoneFrame } from '../components/PhoneFrame'
 import { TabBar } from '../components/ui'
 import { CATEGORIES } from '../data/categories'
+import { TIPS, type Tip } from '../data/catalog'
 import { LoginScreen, SignupScreen } from '../screens/Auth'
 import { OnboardingScreen, OnboardingSummaryScreen } from '../screens/Onboarding'
+import { HomeMapScreen } from '../screens/HomeMap'
 import { MAIN_SCREENS, top, useApp, useClock, type Action, type AppState, type MainScreen, type NavEntry, type ScreenId } from './store'
 
 /** What a screen adapter receives: the live state, dispatch, its nav params and the clock. */
@@ -15,6 +17,19 @@ export interface ScreenContext {
 }
 
 export type ScreenRenderer = (ctx: ScreenContext) => ReactNode
+
+// TIP-01: each opening of the home map (a new home nav entry) gets the next catalog tip;
+// returning to the same entry (back from a point) keeps its tip.
+const tipByEntry = new WeakMap<NavEntry, Tip>()
+let tipCounter = 0
+function tipFor(entry: NavEntry): Tip {
+  let tip = tipByEntry.get(entry)
+  if (!tip) {
+    tip = TIPS[tipCounter++ % TIPS.length]
+    tipByEntry.set(entry, tip)
+  }
+  return tip
+}
 
 const placeholder = (id: ScreenId, title: string): ScreenRenderer => () => (
   <section className="screen-placeholder" data-testid={`screen-${id}`} style={{ padding: 24 }}>
@@ -54,7 +69,15 @@ export const SCREENS: Record<ScreenId, ScreenRenderer> = {
       }
     />
   ),
-  home: placeholder('home', 'Mapa'),
+  home: ({ state, dispatch }) => (
+    <HomeMapScreen
+      map={state.map}
+      tip={state.tipDismissed ? null : tipFor(top(state))}
+      onMapChange={(map) => dispatch({ type: 'setMap', map })}
+      onDismissTip={() => dispatch({ type: 'dismissTip' })}
+      onOpenPoint={(pointId) => dispatch({ type: 'navigate', screen: 'point', params: { pointId } })}
+    />
+  ),
   point: placeholder('point', 'Ponto de coleta'),
   route: placeholder('route', 'Como chegar'),
   schedule: placeholder('schedule', 'Agendar entrega'),

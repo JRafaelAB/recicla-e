@@ -483,11 +483,15 @@ T26 → T27 → T28
 **Where**: `src/screens/HomeMap.tsx` · **Depends on**: T20 · **Requirement**: MAP-01..13, TIP-01..04 (S7–S9)
 
 **Done when**:
-- [ ] E2e: 10 pins + fictional label on first open; chip and search cases from the spec's Independent Tests; empty state + Limpar filtros; state kept after visiting a point and coming back; tip balloon shows, closes, reappears after a tab switch; ⓘ balloon closes on an outside tap
-- [ ] Gate passes: Full
+- [x] E2e: 10 pins + fictional label on first open; chip and search cases from the spec's Independent Tests; empty state + Limpar filtros; state kept after visiting a point and coming back; tip balloon shows, closes, reappears after a tab switch; ⓘ balloon closes on an outside tap
+- [x] Gate passes: Full
 
 **Tests**: e2e · **Gate**: full
 **Commit**: `feat(screens): add home map with filters, search and tips`
+
+**Notes**: `HomeMapScreen({map, tip, onMapChange, onDismissTip, onOpenPoint})` in `src/screens/HomeMap.tsx`: search + chip row on top, illustrated map in the middle, a fixed bottom sheet over the map listing the visible points (scrolls inside), empty state with "Limpar filtros". The screen applies `toggleChip/selectAll/clearFilters` and hands the new `MapState` to `onMapChange` (adapter dispatches `setMap`). TIP-01: the adapter gives each new home nav entry the next catalog tip (`tipFor`, WeakMap by entry), `tip=null` when dismissed; the mascot balloon uses `dismissOnOutside={false}`. TIP-03: the ⓘ next to the list heading shows the URPV note with Fonte. Also adds the T20 deferred chip assertions to `e2e/onboarding.spec.ts` (summary → Pilhas+Celulares selected, empty search; skip/empty summary → Todos). Deviation: the point screen is still a placeholder without a back control, so "state kept after visiting a point" is asserted in T22 (PT-08); MAP-02 is asserted here via a tab switch. Gate: 241 unit/component + 37 e2e (12 new).
+
+**Status**: ✅ Complete
 
 ---
 

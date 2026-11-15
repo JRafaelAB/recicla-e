@@ -8,6 +8,10 @@ const LEVEL_LABELS = ['Moderado', 'Crítico', 'Muito alto', 'Muito alto', 'Alto'
 
 const onb = (page: Page) => page.getByTestId('screen-onboarding')
 const summary = (page: Page) => page.getByTestId('screen-onboardingSummary')
+const chipPressed = (page: Page) =>
+  page.getByTestId('screen-home').getByRole('group', { name: 'Filtrar por aparelho' }).locator('[aria-pressed="true"]')
+const homeSearch = (page: Page) => page.getByTestId('screen-home').getByRole('searchbox', { name: 'Buscar pontos' })
+
 const fresh = () => loggedIn({ onboarding: { done: false, answers: {} } })
 
 /** Answers the 8 cards with the buttons; `tenho` = category ids answered ✅. */
@@ -87,20 +91,27 @@ test('ONB-11/13: all ✕ → empty summary message and "Ir para o mapa" opens th
   await expect(summary(page).getByTestId('summary-item')).toHaveCount(0)
   await summary(page).getByRole('button', { name: 'Ir para o mapa' }).click()
   await expect(page.getByTestId('screen-home')).toBeVisible()
+  await expect(chipPressed(page)).toHaveText([/Todos$/])
+  await expect(homeSearch(page)).toHaveValue('')
 })
 
-test('ONB-12: "Ir para o mapa" on a summary with devices opens the home map', async ({ page }) => {
+test('ONB-12 / MAP-03: "Ir para o mapa" on a summary with devices opens the home map filtered by exactly Pilhas + Celulares', async ({ page }) => {
   await openWith(page, fresh())
   await answerAll(page, ['celulares', 'pilhas'])
   await summary(page).getByRole('button', { name: 'Ir para o mapa' }).click()
   await expect(page.getByTestId('screen-home')).toBeVisible()
   await expect(tabBar(page)).toBeVisible()
+  await expect(chipPressed(page)).toHaveText([/Pilhas$/, /Celulares$/])
+  await expect(homeSearch(page)).toHaveValue('')
+  await expect(page.getByTestId('point-item').locator('.home-item-name')).toHaveText(['Coleta Verde Savassi', 'Recicla Centro', 'Coleta Lourdes', 'Santa Efigênia Eletro', 'Buritis Recicla', 'Central de Coleta Pampulha', 'Pampulha Lâmpadas & Pilhas', 'Barreiro Coleta', 'Venda Nova Eletro'])
 })
 
-test('ONB-08: "Pular e ver mapa" marks onboarding done and opens the home map', async ({ page }) => {
+test('ONB-08 / MAP-04: "Pular e ver mapa" marks onboarding done and opens the home map with Todos and empty search', async ({ page }) => {
   await openWith(page, fresh())
   await onb(page).getByRole('button', { name: 'Pular e ver mapa' }).click()
   await expect(page.getByTestId('screen-home')).toBeVisible()
+  await expect(chipPressed(page)).toHaveText([/Todos$/])
+  await expect(homeSearch(page)).toHaveValue('')
   expect((await readSaved(page))!.onboarding.done).toBe(true)
   await page.reload()
   await expect(page.getByTestId('screen-home')).toBeVisible()
