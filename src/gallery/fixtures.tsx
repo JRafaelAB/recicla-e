@@ -85,7 +85,8 @@ export const FIXTURES: Fixture[] = [
   {
     id: 'S13',
     name: 'Scheduling, day with no slots',
-    render: () => <ScheduleScreen pointId={1} now={MONDAY_EVENING} onBack={noop} onConfirm={noop} initialDate="2026-11-16" />,
+    // Point 3 (Coleta Lourdes, closes 14h) has a short item list, so the no-slots message stays inside the frame.
+    render: () => <ScheduleScreen pointId={3} now={MONDAY_EVENING} onBack={noop} onConfirm={noop} initialDate="2026-11-16" />,
   },
   { id: 'S14', name: 'Celebration / impact after booking', render: () => <CelebrationScreen booking={booking} onBackToMap={noop} /> },
   { id: 'S15', tab: 'learn', name: 'Aprender list', render: () => <LearnScreen onOpenCategory={noop} /> },

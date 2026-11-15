@@ -33,6 +33,16 @@ test('GAL-01/02: gallery.html offline shows 18 captioned 390×844 frames', async
   }
 })
 
+test('GAL-01: S13 frame shows the no-slots state inside the visible screen', async ({ page }) => {
+  await page.goto(distUrl('gallery.html'))
+  const frame = page.getByTestId('gallery-item').nth(12)
+  const screen = await frame.locator('.phone-screen').boundingBox()
+  const footer = await frame.locator('.sch-footer').boundingBox()
+  const msg = await frame.getByText('Sem horários disponíveis neste dia').boundingBox()
+  expect(msg!.y).toBeGreaterThanOrEqual(screen!.y)
+  expect(msg!.y + msg!.height).toBeLessThanOrEqual(Math.min(screen!.y + screen!.height, footer!.y))
+})
+
 test('GAL-02: frames use the fixed clock and the app components', async ({ page }) => {
   await page.goto(distUrl('gallery.html'))
   const frame = (n: number) => page.getByTestId('gallery-item').nth(n - 1)
