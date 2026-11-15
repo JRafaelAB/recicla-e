@@ -1,7 +1,9 @@
 import type { Dispatch, ReactNode } from 'react'
 import { PhoneFrame } from '../components/PhoneFrame'
 import { TabBar } from '../components/ui'
+import { CATEGORIES } from '../data/categories'
 import { LoginScreen, SignupScreen } from '../screens/Auth'
+import { OnboardingScreen, OnboardingSummaryScreen } from '../screens/Onboarding'
 import { MAIN_SCREENS, top, useApp, useClock, type Action, type AppState, type MainScreen, type NavEntry, type ScreenId } from './store'
 
 /** What a screen adapter receives: the live state, dispatch, its nav params and the clock. */
@@ -37,8 +39,21 @@ export const SCREENS: Record<ScreenId, ScreenRenderer> = {
       onHaveAccount={() => dispatch({ type: 'back' })}
     />
   ),
-  onboarding: placeholder('onboarding', 'Onboarding'),
-  onboardingSummary: placeholder('onboardingSummary', 'Resumo do onboarding'),
+  onboarding: ({ state, dispatch }) => (
+    <OnboardingScreen
+      index={CATEGORIES.findIndex((c) => state.onboarding.answers[c.id] === undefined)}
+      onAnswer={(category, answer) => dispatch({ type: 'answerCard', category, answer })}
+      onSkip={() => dispatch({ type: 'skipOnboarding' })}
+    />
+  ),
+  onboardingSummary: ({ state, dispatch }) => (
+    <OnboardingSummaryScreen
+      answers={state.onboarding.answers}
+      onGoToMap={(tenho) =>
+        dispatch({ type: 'openMap', handoff: tenho.length ? { kind: 'category', categories: tenho } : { kind: 'reset' } })
+      }
+    />
+  ),
   home: placeholder('home', 'Mapa'),
   point: placeholder('point', 'Ponto de coleta'),
   route: placeholder('route', 'Como chegar'),

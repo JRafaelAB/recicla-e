@@ -1,4 +1,6 @@
 import type { ReactNode } from 'react'
+import { categoryLevel, SUBTYPES, type CategoryId, type Level } from '../data/categories'
+import { LEVEL_JUSTIFICATION } from '../data/catalog'
 import '../components/theme.css'
 import './common.css'
 
@@ -25,4 +27,18 @@ export function SectionTitle({ children, info }: { children: ReactNode; info?: R
       {info}
     </h2>
   )
+}
+
+/** Danger-scale props for a category: its level and the justification of its highest-level sub-type. */
+export function categoryDanger(id: CategoryId): { level: Level; justification: string; sourceId: string } {
+  const top = SUBTYPES.filter((s) => s.categoryId === id).reduce((a, b) => (b.level > a.level ? b : a))
+  const j = LEVEL_JUSTIFICATION[top.id]
+  return { level: categoryLevel(id), justification: j.text, sourceId: j.sourceId }
+}
+
+/** Danger-scale props for a sub-type. */
+export function subtypeDanger(subtypeId: string): { level: Level; justification: string; sourceId: string } {
+  const st = SUBTYPES.find((s) => s.id === subtypeId)!
+  const j = LEVEL_JUSTIFICATION[subtypeId]
+  return { level: st.level, justification: j.text, sourceId: j.sourceId }
 }

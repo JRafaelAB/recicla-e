@@ -36,15 +36,32 @@ const NEIGHBORHOOD_LABELS = POINTS.filter((p, i) => POINTS.findIndex((q) => q.ne
 
 const FULL_VIEW = '0 -8 100 106'
 
-/** Mini variant: zoom to the pins and the user dot, with room for pin heads. */
-function miniView(points: Point[]): string {
+// Pin geometry in map units: the head reaches 9.4 above the point, 3.2 to each side.
+const PIN_TOP = 9.4
+const PIN_HALF = 3.2
+const MINI_PAD = 5
+const MINI_MIN_W = 36
+/** Aspect ratio (width / height) the mini map is framed for. */
+export const MINI_ASPECT = 2
+
+/**
+ * Mini variant: fit the bounds of the pins (whole pin heads) and the user dot, plus padding,
+ * then widen the shorter side to MINI_ASPECT around the same center.
+ */
+export function miniView(points: Point[]): string {
   const xs = [USER_LOCATION.map.x, ...points.map((p) => p.map.x)]
   const ys = [USER_LOCATION.map.y, ...points.map((p) => p.map.y)]
-  const cx = (Math.min(...xs) + Math.max(...xs)) / 2
-  const cy = (Math.min(...ys) + Math.max(...ys)) / 2 - 4
-  const w = Math.max(Math.max(...xs) - Math.min(...xs) + 30, 64)
-  const h = Math.max(Math.max(...ys) - Math.min(...ys) + 30, 38)
-  return `${(cx - w / 2).toFixed(1)} ${(cy - h / 2).toFixed(1)} ${w.toFixed(1)} ${h.toFixed(1)}`
+  const minX = Math.min(...xs) - PIN_HALF - MINI_PAD
+  const maxX = Math.max(...xs) + PIN_HALF + MINI_PAD
+  const minY = Math.min(...(points.length ? points.map((p) => p.map.y - PIN_TOP) : []), USER_LOCATION.map.y) - MINI_PAD
+  const maxY = Math.max(...ys) + MINI_PAD
+  let w = Math.max(maxX - minX, MINI_MIN_W)
+  let h = maxY - minY
+  if (w / h < MINI_ASPECT) w = h * MINI_ASPECT
+  else h = w / MINI_ASPECT
+  const cx = (minX + maxX) / 2
+  const cy = (minY + maxY) / 2
+  return [cx - w / 2, cy - h / 2, w, h].map((n) => n.toFixed(1)).join(' ')
 }
 
 const PIN_PATH = 'M0 0 C-1 -2.2 -3.2 -3.6 -3.2 -6.2 A3.2 3.2 0 1 1 3.2 -6.2 C3.2 -3.6 1 -2.2 0 0 Z'

@@ -1,7 +1,7 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { POINTS, USER_LOCATION } from '../data/points'
-import { BHMap } from './BHMap'
+import { BHMap, MINI_ASPECT, miniView } from './BHMap'
 
 afterEach(cleanup)
 
@@ -30,6 +30,19 @@ describe('BHMap (MAP-01, ONB-10)', () => {
     render(<BHMap mini points={byId(1)} />)
     expect(pinIds()).toEqual([1])
     expect(screen.getAllByTestId('user-dot')).toHaveLength(1)
+  })
+
+  it('ONB-10: the mini view frames every shown pin head and the user dot, with padding', () => {
+    for (const set of [byId(1), byId(1, 5), byId(9, 10), byId(7, 8, 9)]) {
+      const [x, y, w, h] = miniView(set).split(' ').map(Number)
+      const inside = (px: number, py: number) => px > x && px < x + w && py > y && py < y + h
+      expect(inside(USER_LOCATION.map.x, USER_LOCATION.map.y)).toBe(true)
+      for (const p of set) {
+        expect(inside(p.map.x - 3.2, p.map.y - 9.4)).toBe(true) // pin head, top-left
+        expect(inside(p.map.x + 3.2, p.map.y + 0.5)).toBe(true) // pin tip, bottom-right
+      }
+      expect(w / h).toBeCloseTo(MINI_ASPECT, 1)
+    }
   })
 
   it('pins are named after their point', () => {
