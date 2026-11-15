@@ -117,7 +117,7 @@ T26 → T27 → T28
 **Tests**: unit · **Gate**: quick
 **Commit**: `feat(data): add device categories and sub-types with danger levels`
 
-**Status**: ✅ Complete (this commit)
+**Status**: ✅ Complete (commit f81e358)
 
 ---
 
@@ -129,12 +129,16 @@ T26 → T27 → T28
 **Requirement**: Mock Data, PT-04, PT-05
 
 **Done when**:
-- [ ] Test asserts the derived category acceptance list from the spec (pilhas 1,2,3,6,7,8 … cabos 1,2,4,6,7,10)
-- [ ] Test asserts distances are unique and match the table; point 7 accepts all 14 sub-types; only 7 accepts `bateria-automotiva`
-- [ ] Gate passes: Quick
+- [x] Test asserts the derived category acceptance list from the spec (pilhas 1,2,3,6,7,8 … cabos 1,2,4,6,7,10)
+- [x] Test asserts distances are unique and match the table; point 7 accepts all 14 sub-types; only 7 accepts `bateria-automotiva`
+- [x] Gate passes: Quick
 
 **Tests**: unit · **Gate**: quick
 **Commit**: `feat(data): add fictional belo horizonte collection points`
+
+**Notes**: `map` coordinates are normalized 0–100 for T16 to scale; `USER_LOCATION` (Funcionários) is exported for the user dot.
+
+**Status**: ✅ Complete (this commit)
 
 ---
 
