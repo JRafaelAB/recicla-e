@@ -50,55 +50,55 @@ const home = (map: { categories: CategoryId[]; query: string }, tip: (typeof TIP
 
 /** The 18 screen states of the spec's Screen Inventory, built from real data with a fixed clock. */
 export const FIXTURES: Fixture[] = [
-  { id: 'S1', name: 'Login', render: () => <LoginScreen onLogin={noop} onCreateAccount={noop} /> },
+  { id: 'S1', name: 'Entrar', render: () => <LoginScreen onLogin={noop} onCreateAccount={noop} /> },
   {
     id: 'S2',
-    name: 'Login with validation errors',
+    name: 'Entrar com erros de validação',
     render: () => (
       <LoginScreen onLogin={noop} onCreateAccount={noop} initialEmail="anax.com" initialPassword="123" initialErrors={validateLogin('anax.com', '123')} />
     ),
   },
-  { id: 'S3', name: 'Cadastro (sign-up)', render: () => <SignupScreen onSignup={noop} onHaveAccount={noop} /> },
-  { id: 'S4', name: 'Onboarding card (with progress)', render: () => <OnboardingScreen index={2} onAnswer={noop} onSkip={noop} /> },
+  { id: 'S3', name: 'Cadastro', render: () => <SignupScreen onSignup={noop} onHaveAccount={noop} /> },
+  { id: 'S4', name: 'Apresentação: cartão de aparelho (com progresso)', render: () => <OnboardingScreen index={2} onAnswer={noop} onSkip={noop} /> },
   {
     id: 'S5',
-    name: 'Onboarding summary with devices',
+    name: 'Apresentação: resumo com aparelhos',
     render: () => <OnboardingSummaryScreen answers={answers(['celulares', 'pilhas'])} onGoToMap={noop} />,
   },
-  { id: 'S6', name: 'Onboarding summary, no devices', render: () => <OnboardingSummaryScreen answers={answers([])} onGoToMap={noop} /> },
-  { id: 'S7', tab: 'home', name: 'Home map, default, with mascot tip balloon', render: () => home({ categories: [], query: '' }, TIPS[0]) },
-  { id: 'S8', tab: 'home', name: 'Home map, filtered by a category', render: () => home({ categories: ['linhabranca'], query: '' }, null) },
-  { id: 'S9', tab: 'home', name: 'Home map, no results', render: () => home({ categories: [], query: 'xyz' }, null) },
+  { id: 'S6', name: 'Apresentação: resumo sem aparelhos', render: () => <OnboardingSummaryScreen answers={answers([])} onGoToMap={noop} /> },
+  { id: 'S7', tab: 'home', name: 'Mapa inicial, padrão, com balão de dica do mascote', render: () => home({ categories: [], query: '' }, TIPS[0]) },
+  { id: 'S8', tab: 'home', name: 'Mapa inicial, filtrado por uma categoria', render: () => home({ categories: ['linhabranca'], query: '' }, null) },
+  { id: 'S9', tab: 'home', name: 'Mapa inicial, sem resultados', render: () => home({ categories: [], query: 'xyz' }, null) },
   {
     id: 'S10',
-    name: 'Point detail',
+    name: 'Detalhe do ponto',
     render: () => <PointDetailScreen pointId={1} onBack={noop} onRoute={noop} onSchedule={noop} />,
   },
-  { id: 'S11', name: 'Point detail with route ("Como chegar")', render: () => <RouteScreen pointId={5} onClose={noop} /> },
+  { id: 'S11', name: 'Detalhe do ponto com rota ("Como chegar")', render: () => <RouteScreen pointId={5} onClose={noop} /> },
   {
     id: 'S12',
-    name: 'Scheduling form',
+    name: 'Formulário de agendamento',
     render: () => (
       <ScheduleScreen pointId={1} now={GALLERY_NOW} onBack={noop} onConfirm={noop} initialQty={{ celular: 2 }} initialDate="2026-11-17" initialSlot="09:00" />
     ),
   },
   {
     id: 'S13',
-    name: 'Scheduling, day with no slots',
+    name: 'Agendamento, dia sem horários',
     // Point 3 (Coleta Lourdes, closes 14h) has a short item list, so the no-slots message stays inside the frame.
     render: () => <ScheduleScreen pointId={3} now={MONDAY_EVENING} onBack={noop} onConfirm={noop} initialDate="2026-11-16" />,
   },
-  { id: 'S14', name: 'Celebration / impact after booking', render: () => <CelebrationScreen booking={booking} onBackToMap={noop} /> },
-  { id: 'S15', tab: 'learn', name: 'Aprender list', render: () => <LearnScreen onOpenCategory={noop} /> },
-  { id: 'S16', name: 'Device page (Aprender detail)', render: () => <DeviceScreen categoryId="lampadas" onBack={noop} onSeePoints={noop} /> },
+  { id: 'S14', name: 'Celebração / impacto após agendar', render: () => <CelebrationScreen booking={booking} onBackToMap={noop} /> },
+  { id: 'S15', tab: 'learn', name: 'Lista do Aprender', render: () => <LearnScreen onOpenCategory={noop} /> },
+  { id: 'S16', name: 'Página do aparelho (detalhe do Aprender)', render: () => <DeviceScreen categoryId="lampadas" onBack={noop} onSeePoints={noop} /> },
   {
     id: 'S17', tab: 'profile',
-    name: 'Perfil, no bookings',
+    name: 'Perfil, sem agendamentos',
     render: () => <ProfileScreen name="Ana" bookings={[]} onOpenMap={noop} onLogout={noop} onReset={noop} />,
   },
   {
     id: 'S18', tab: 'profile',
-    name: 'Perfil with bookings',
+    name: 'Perfil com agendamentos',
     render: () => <ProfileScreen name="Ana" bookings={[booking, lampBooking]} onOpenMap={noop} onLogout={noop} onReset={noop} />,
   },
 ]
