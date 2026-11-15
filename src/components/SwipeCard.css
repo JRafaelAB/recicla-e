@@ -1,0 +1,39 @@
+.swipe { display: flex; flex-direction: column; align-items: stretch; gap: 18px; }
+.swipe-card {
+  position: relative;
+  background: #fff;
+  border: 2px solid var(--line);
+  border-radius: 24px;
+  box-shadow: 0 6px 0 var(--line);
+  padding: 20px;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+  transition-property: transform;
+  transition-timing-function: ease-out;
+}
+.swipe-dragging { cursor: grabbing; }
+.swipe-stamp {
+  position: absolute; top: 18px; z-index: 2;
+  padding: 4px 10px;
+  border: 3px solid currentColor;
+  border-radius: 10px;
+  font-size: 18px; font-weight: 900; letter-spacing: 1px;
+  background: rgba(255, 255, 255, 0.85);
+  pointer-events: none;
+}
+.swipe-stamp-tenho { left: 16px; color: var(--green); transform: rotate(-12deg); }
+.swipe-stamp-nao { right: 16px; color: var(--red); transform: rotate(12deg); }
+.swipe-actions { display: flex; gap: 14px; }
+.swipe-btn {
+  flex: 1;
+  padding: 13px 10px;
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;
+  cursor: pointer;
+}
+.swipe-btn:active:not(:disabled) { transform: translateY(4px); box-shadow: none !important; }
+.swipe-btn:disabled { opacity: 0.6; cursor: default; }
+.swipe-btn-nao { background: #fff; color: var(--red); border-color: var(--line); box-shadow: 0 4px 0 var(--line); }
+.swipe-btn-tenho { background: var(--green); color: #fff; box-shadow: 0 4px 0 var(--green-dark); }

@@ -412,11 +412,15 @@ T26 → T27 → T28
 **Requirement**: ONB-04, ONB-05, ONB-07
 
 **Done when**:
-- [ ] Tests: drag right past the threshold → `onAnswer('tenho')`; left → `'nao'`; below the threshold → snaps back with no answer; a second answer during the animation is ignored
-- [ ] Gate passes: Quick
+- [x] Tests: drag right past the threshold → `onAnswer('tenho')`; left → `'nao'`; below the threshold → snaps back with no answer; a second answer during the animation is ignored
+- [x] Gate passes: Quick
 
 **Tests**: component · **Gate**: quick
 **Commit**: `feat(ui): add swipeable onboarding card`
+
+**Notes**: SwipeCard renders its own ✕ "Não tenho" / ✅ "Tenho" buttons so taps and drags share one lock (ONB-07); buttons are disabled while the card exits. `onAnswer` fires after `EXIT_MS` (280 ms) via a timer (jsdom fires no transitionend); the card then resets, so the parent can reuse it or remount with a new `key`. Exports `SWIPE_THRESHOLD` (100), `EXIT_MS`, `SwipeAnswer`. Test id `swipe-card`, `data-exiting` while animating. Gate: 240 tests.
+
+**Status**: ✅ Complete
 
 ---
 
