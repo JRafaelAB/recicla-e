@@ -569,11 +569,13 @@ T26 → T27 → T28
 **Where**: `src/gallery/fixtures.tsx` · **Depends on**: T25 · **Requirement**: GAL-01, GAL-02
 
 **Done when**:
-- [ ] Unit tests: ids S1–S18 and names exactly match the Screen Inventory; each fixture renders a screen component from `src/screens`
-- [ ] Gate passes: Quick
+- [x] Unit tests: ids S1–S18 and names exactly match the Screen Inventory; each fixture renders a screen component from `src/screens`
+- [x] Gate passes: Quick
 
 **Tests**: unit · **Gate**: quick
 **Commit**: `feat(gallery): add screen-state fixtures`
+
+**Status**: ✅ Complete
 
 ---
 
