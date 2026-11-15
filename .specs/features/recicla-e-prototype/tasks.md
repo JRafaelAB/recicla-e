@@ -212,11 +212,15 @@ T26 → T27 → T28
 **Requirement**: MAP-02..07, MAP-13
 
 **Done when**:
-- [ ] Tests cover: no handoff keeps state; category handoff replaces categories and clears query; reset handoff → Todos + empty; toggle select/deselect; deselecting the only chip → Todos; Todos clears; clearFilters
-- [ ] Gate passes: Quick
+- [x] Tests cover: no handoff keeps state; category handoff replaces categories and clears query; reset handoff → Todos + empty; toggle select/deselect; deselecting the only chip → Todos; Todos clears; clearFilters
+- [x] Gate passes: Quick
 
 **Tests**: unit · **Gate**: quick
 **Commit**: `feat(logic): add map filter state transitions`
+
+**Notes**: Search text is kept by `toggleChip`/`selectAll` (MAP-07 only clears categories); `clearFilters()` takes no argument.
+
+**Status**: ✅ Complete
 
 ---
 
