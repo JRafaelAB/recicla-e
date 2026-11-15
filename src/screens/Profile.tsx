@@ -85,7 +85,7 @@ export function ProfileScreen({ name, bookings, onOpenMap, onLogout, onReset, in
                 <p className="prof-booking-point"><span aria-hidden="true">📍</span> {pointById(b.pointId).name}</p>
                 <p className="prof-booking-when"><span aria-hidden="true">📅</span> {dayLabel(dateOf(b.date))} às {b.slot}</p>
                 <p className="prof-booking-items">
-                  {b.items.map((i) => `${i.qty} × ${subtypeOf(i.subtypeId).label}`).join(' · ')}
+                  {b.items.map((i) => `${i.qty} ${i.qty === 1 ? subtypeOf(i.subtypeId).noun.singular : subtypeOf(i.subtypeId).noun.plural}`).join(' · ')}
                 </p>
               </li>
             ))}

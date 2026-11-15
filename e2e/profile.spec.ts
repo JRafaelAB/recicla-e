@@ -56,7 +56,7 @@ test('PROF-01: after booking 2 celulares in the app, Perfil shows "Itens agendad
   await expect(b).toHaveCount(1)
   await expect(b).toContainText('Coleta Verde Savassi')
   await expect(b).toContainText('Ter, 17/11 às 09:00')
-  await expect(b).toContainText('2 × Celular')
+  await expect(b).toContainText('2 celulares')
 })
 
 test('PROF-06: 2 celulares + 1 lâmpada fluorescente → "Impacto potencial" totals cobre 18 g, cobalto 7 g, mercúrio 4 mg, each with Fonte', async ({ page }) => {
