@@ -372,11 +372,15 @@ T26 → T27 → T28
 **Requirement**: SCALE-01, SCALE-03
 
 **Done when**:
-- [ ] Tests: level 4 → 4 filled segments, 😨, "Muito alto"; tap shows the justification + "Escala educativa recicla-E: toxicidade + risco de fogo"
-- [ ] Gate passes: Quick
+- [x] Tests: level 4 → 4 filled segments, 😨, "Muito alto"; tap shows the justification + "Escala educativa recicla-E: toxicidade + risco de fogo"
+- [x] Gate passes: Quick
 
 **Tests**: component · **Gate**: quick
 **Commit**: `feat(ui): add emoji danger scale`
+
+**Notes**: Props `{level, label, justification, sourceId?, compact?}`; screens pass `LEVEL_JUSTIFICATION[subtypeId]` (for a category, the justification of its highest-level sub-type). Exports `DANGER_LEVELS` and `SCALE_NOTE`. The balloon shows a FonteNote when `sourceId` is given. Level colors: `--lvl-1..5` in theme.css. Spec-precision gap: SCALE-01 says "the level's color" but the spec defines no colors; chosen green → lime → yellow → orange → magenta. Gate: 222 tests.
+
+**Status**: ✅ Complete
 
 ---
 
