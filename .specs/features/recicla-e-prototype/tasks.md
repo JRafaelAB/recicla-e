@@ -352,11 +352,15 @@ T26 → T27 → T28
 **Requirement**: SCH-02, TIP-02..04, NAV-01, PT-05
 
 **Done when**:
-- [ ] Component tests: Stepper bounds 0–20 with disabled ends; Balloon closes on ✕ and on an outside tap; TabBar marks the active tab; FictionalBadge text
-- [ ] Gate passes: Quick
+- [x] Component tests: Stepper bounds 0–20 with disabled ends; Balloon closes on ✕ and on an outside tap; TabBar marks the active tab; FictionalBadge text
+- [x] Gate passes: Quick
 
 **Tests**: component · **Gate**: quick
 **Commit**: `feat(ui): add theme and shared ui primitives`
+
+**Notes**: `theme.css` is imported by `ui.tsx`, so any consumer of a primitive gets the tokens. Balloon closes on `pointerdown` outside; `dismissOnOutside={false}` lets the mascot tip close only on ✕ (TIP-02); `boundaryRef` keeps the ⓘ trigger from counting as outside. Stepper buttons are labelled "Diminuir/Aumentar {label}", value has test id `stepper-value`. TabBar ids: home/learn/profile, active tab has `aria-current="page"`. FonteNote renders "Fonte: {source name}" linking the URL (no request unless clicked). Mascot (`pose`: idle/talking/celebrating) and Confetti are visual only, not unit-tested. Gate: 214 tests.
+
+**Status**: ✅ Complete
 
 ---
 

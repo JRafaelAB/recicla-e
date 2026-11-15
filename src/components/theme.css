@@ -1,0 +1,206 @@
+/* recicla-E theme: playful, bright, chunky. Plain CSS variables (design: no CSS-in-JS). */
+:root {
+  --font: ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
+
+  --green: #58cc02;
+  --green-dark: #46a302;
+  --green-light: #d7ffb8;
+  --blue: #1cb0f6;
+  --blue-dark: #1899d6;
+  --yellow: #ffc800;
+  --orange: #ff9600;
+  --red: #ff4b4b;
+  --red-dark: #ea2b2b;
+  --purple: #ce82ff;
+
+  --ink: #3c3c3c;
+  --ink-soft: #777;
+  --line: #e5e5e5;
+  --line-dark: #cecece;
+  --bg: #f7f7f7;
+  --card: #fff;
+
+  /* danger levels 1..5 */
+  --lvl-1: #58cc02;
+  --lvl-2: #a5d800;
+  --lvl-3: #ffc800;
+  --lvl-4: #ff9600;
+  --lvl-5: #b4237a;
+
+  --radius: 16px;
+  --radius-lg: 22px;
+  --shadow-3d: 0 4px 0;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+button { font-family: inherit; }
+
+/* ---------- Button ---------- */
+.btn {
+  appearance: none;
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.06s, box-shadow 0.06s, filter 0.15s;
+  user-select: none;
+}
+.btn:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 0 0 transparent !important; }
+.btn:disabled { cursor: default; background: var(--line) !important; color: #afafaf !important; box-shadow: var(--shadow-3d) var(--line-dark) !important; border-color: transparent !important; }
+.btn-block { display: block; width: 100%; }
+.btn-primary { background: var(--green); color: #fff; box-shadow: var(--shadow-3d) var(--green-dark); }
+.btn-primary:hover:not(:disabled) { filter: brightness(1.05); }
+.btn-blue { background: var(--blue); color: #fff; box-shadow: var(--shadow-3d) var(--blue-dark); }
+.btn-secondary { background: #fff; color: var(--blue); border-color: var(--line); box-shadow: var(--shadow-3d) var(--line); }
+.btn-ghost { background: transparent; color: var(--blue); box-shadow: none; text-transform: none; letter-spacing: 0; }
+.btn-danger { background: var(--red); color: #fff; box-shadow: var(--shadow-3d) var(--red-dark); }
+
+/* ---------- Chip ---------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  padding: 7px 14px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 3px 0 var(--line);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.chip:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--line); }
+.chip-on { background: var(--green-light); border-color: var(--green); color: var(--green-dark); box-shadow: 0 3px 0 var(--green); }
+
+/* ---------- Stepper ---------- */
+.stepper { display: inline-flex; align-items: center; gap: 10px; }
+.stepper-btn {
+  width: 38px; height: 38px;
+  border-radius: 12px;
+  border: 2px solid var(--line);
+  background: #fff;
+  color: var(--blue);
+  font-size: 22px; font-weight: 800; line-height: 1;
+  box-shadow: 0 3px 0 var(--line);
+  cursor: pointer;
+}
+.stepper-btn:active:not(:disabled) { transform: translateY(3px); box-shadow: none; }
+.stepper-btn:disabled { color: #ccc; cursor: default; }
+.stepper-value { min-width: 26px; text-align: center; font-size: 18px; font-weight: 800; }
+
+/* ---------- Balloon ---------- */
+.balloon {
+  position: relative;
+  background: #fff;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 0 var(--line);
+  padding: 12px 36px 12px 14px;
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+.balloon-close {
+  position: absolute; top: 6px; right: 6px;
+  width: 26px; height: 26px;
+  border: none; border-radius: 50%;
+  background: var(--bg);
+  color: var(--ink-soft);
+  font-size: 13px; font-weight: 800;
+  cursor: pointer;
+}
+.balloon::after { content: ''; position: absolute; width: 14px; height: 14px; background: #fff; border: 2px solid var(--line); border-top: none; border-left: none; }
+.balloon-tail-none::after { display: none; }
+.balloon-tail-left::after { left: -9px; top: 22px; transform: rotate(135deg); }
+.balloon-tail-top::after { top: -9px; left: 18px; transform: rotate(-135deg); }
+.balloon-tail-bottom::after { bottom: -9px; left: 26px; transform: rotate(45deg); }
+
+/* ---------- InfoIcon ---------- */
+.info { position: relative; display: inline-block; vertical-align: middle; }
+.info-btn {
+  width: 24px; height: 24px; padding: 0;
+  border: none; border-radius: 50%;
+  background: transparent;
+  color: var(--blue);
+  font-size: 18px; font-weight: 800;
+  cursor: pointer;
+}
+.info-balloon { position: absolute; z-index: 30; top: 32px; left: -12px; width: 250px; font-weight: 600; text-transform: none; letter-spacing: 0; color: var(--ink); }
+
+/* ---------- Fonte / badge ---------- */
+.fonte { display: block; margin-top: 4px; color: var(--ink-soft); font-size: 11.5px; font-weight: 600; }
+.fonte a { color: inherit; }
+.fictional-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #fff4cc;
+  color: #8a6d00;
+  border: 2px solid #ffe27a;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* ---------- TabBar ---------- */
+.tabbar {
+  display: flex;
+  border-top: 2px solid var(--line);
+  background: #fff;
+  padding: 6px 8px 18px;
+}
+.tab {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 6px 0;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;
+  cursor: pointer;
+}
+.tab-icon { font-size: 24px; line-height: 1; filter: grayscale(0.6); }
+.tab-on { background: #ddf4ff; border-color: #84d8ff; color: var(--blue); }
+.tab-on .tab-icon { filter: none; }
+
+/* ---------- Mascot ---------- */
+.mascot { display: block; overflow: visible; }
+.mascot-idle { animation: reci-bob 2.6s ease-in-out infinite; }
+.mascot-talking { animation: reci-bob 1.4s ease-in-out infinite; }
+.mascot-celebrating { animation: reci-jump 0.9s ease-in-out infinite; }
+@keyframes reci-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes reci-jump { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-12px) rotate(-3deg); } 60% { transform: translateY(-12px) rotate(3deg); } }
+
+/* ---------- Confetti ---------- */
+.confetti { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.confetti-piece {
+  position: absolute; top: -12px;
+  width: 9px; height: 14px;
+  border-radius: 2px;
+  animation-name: confetti-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes confetti-fall {
+  0% { transform: translateY(0) rotate(0); opacity: 1; }
+  100% { transform: translateY(860px) rotate(540deg); opacity: 0.7; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot, .confetti-piece { animation: none !important; }
+}
