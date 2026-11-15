@@ -312,11 +312,15 @@ T26 → T27 → T28
 **Requirement**: MAP-11, SCH-03
 
 **Done when**:
-- [ ] Tests: `km(0.8)` → "0,8 km"; `km(12.3)` → "12,3 km"; quantity formats; day labels in pt-BR
-- [ ] Gate passes: Quick
+- [x] Tests: `km(0.8)` → "0,8 km"; `km(12.3)` → "12,3 km"; quantity formats; day labels in pt-BR
+- [x] Gate passes: Quick
 
 **Tests**: unit · **Gate**: quick
 **Commit**: `feat(logic): add pt-BR formatters`
+
+**Notes**: `dayLabel(date)` returns "Seg, 16/11" (spec-precision gap: spec gives no day-label format; chosen abbreviated pt-BR weekday + dd/mm). `quantity(value, unit)` auto-scales mg/g/kg; `impact.ts` now uses it instead of its private copy. Phase 2 Build gate passed: 166 unit + 2 e2e.
+
+**Status**: ✅ Complete
 
 ---
 

@@ -1,5 +1,6 @@
 import { SUBTYPES, type CategoryId } from '../data/categories'
 import { FACTS, MULTIPLIABLE } from '../data/catalog'
+import { quantity } from './format'
 
 export interface ImpactItem {
   subtypeId: string
@@ -16,19 +17,12 @@ export interface ImpactLine {
   researchRef: string
 }
 
-const MG: Record<string, number> = { mg: 1, g: 1000, kg: 1_000_000 }
-
-function quantity(mg: number): string {
-  const [v, unit] = mg >= MG.kg ? [mg / MG.kg, 'kg'] : mg >= MG.g ? [mg / MG.g, 'g'] : [mg, 'mg']
-  return `${String(Math.round(v * 10) / 10).replace('.', ',')} ${unit}`
-}
-
 const subtypeOf = (id: string) => SUBTYPES.find((s) => s.id === id)!
 
 function quantified(subtypeId: string, qty: number, phrase: (contem: string) => string): ImpactLine[] {
   return MULTIPLIABLE.filter((m) => m.subtypeId === subtypeId).map((m) => {
     const fact = FACTS.find((f) => f.id === m.factId)!
-    const amount = quantity(Math.round(m.value * MG[m.unit] * qty))
+    const amount = quantity(m.value * qty, m.unit)
     return {
       kind: 'quantified',
       subtypeId,
