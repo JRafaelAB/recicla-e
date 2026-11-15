@@ -138,7 +138,7 @@ T26 → T27 → T28
 
 **Notes**: `map` coordinates are normalized 0–100 for T16 to scale; `USER_LOCATION` (Funcionários) is exported for the user dot.
 
-**Status**: ✅ Complete (this commit)
+**Status**: ✅ Complete (commit b16f00e)
 
 ---
 
@@ -150,13 +150,17 @@ T26 → T27 → T28
 **Requirement**: CAT-R1..R6, NFR-03, SCALE-03
 
 **Done when**:
-- [ ] Tests: every fact has text, ≥1 sub-type, a known source with URL, and a `researchRef` (CAT-R1)
-- [ ] Tests: no text matches the §11 claims (e.g. "20 mil litros", "5º maior", "reciclado e reaproveitado") (CAT-R2)
-- [ ] Tests: `MULTIPLIABLE` equals exactly the 5 CAT-R4 values; every sub-type has a guide and ≥1 fact; ≥12 tips; URPV note present (CAT-R6)
-- [ ] Gate passes: Quick
+- [x] Tests: every fact has text, ≥1 sub-type, a known source with URL, and a `researchRef` (CAT-R1)
+- [x] Tests: no text matches the §11 claims (e.g. "20 mil litros", "5º maior", "reciclado e reaproveitado") (CAT-R2)
+- [x] Tests: `MULTIPLIABLE` equals exactly the 5 CAT-R4 values; every sub-type has a guide and ≥1 fact; ≥12 tips; URPV note present (CAT-R6)
+- [x] Gate passes: Quick
 
 **Tests**: unit · **Gate**: quick
 **Commit**: `feat(data): add sourced educational content catalog`
+
+**Notes**: 34 facts, 17 tips, 23 sources, 14 guides, 14 justifications, PNRS card, URPV note. Tips, guides, justifications and notes also carry `sourceId(s)` + `researchRef` so Fonte can render everywhere. `perUnit` exists only on the 5 CAT-R4 facts. Extra guards: every source URL must appear verbatim in research.md, and every numeric token must appear as a whole token in research.md. Spec-precision gaps: research §10 has no dedicated row for `linhabranca-outros` (its justification reuses the linha branca row); `lampada-led` has only a qualitative fact; `tv-led` and `linhabranca-outros` have only global aggregate numbers, none per unit. Research items without a URL were left out (CRT "25% chumbo no vidro", Sony/Purdue LED claim, Green Eletron storage tip).
+
+**Status**: ✅ Complete (this commit)
 
 ---
 
