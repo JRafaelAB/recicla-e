@@ -292,11 +292,15 @@ T26 → T27 → T28
 **Requirement**: EDGE-01, PROF-03..05
 
 **Done when**:
-- [ ] Tests: round-trip; corrupt JSON → defaults; throwing backend → memory works; clear removes everything
-- [ ] Gate passes: Quick
+- [x] Tests: round-trip; corrupt JSON → defaults; throwing backend → memory works; clear removes everything
+- [x] Gate passes: Quick
 
 **Tests**: unit · **Gate**: quick
 **Commit**: `feat(logic): add local storage with in-memory fallback`
+
+**Notes**: Exports `Booking`, `Persisted`, `StorageBackend`, `DEFAULT_PERSISTED`, `STORAGE_KEY`. Memory mirrors every save, so a backend that fails mid-session keeps the latest state.
+
+**Status**: ✅ Complete
 
 ---
 
