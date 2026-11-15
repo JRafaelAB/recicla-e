@@ -232,11 +232,15 @@ T26 → T27 → T28
 **Requirement**: SCH-03..05, EDGE-04
 
 **Done when**:
-- [ ] Tests: 7 days start today; point 2 closed Sat/Sun; point 1 Saturday slots 08:00–11:00; weekday point 1 08:00–17:00; past slots hidden today; after closing → [] (no-slot state)
-- [ ] Gate passes: Quick
+- [x] Tests: 7 days start today; point 2 closed Sat/Sun; point 1 Saturday slots 08:00–11:00; weekday point 1 08:00–17:00; past slots hidden today; after closing → [] (no-slot state)
+- [x] Gate passes: Quick
 
 **Tests**: unit · **Gate**: quick
 **Commit**: `feat(logic): add collection point time-slot availability`
+
+**Notes**: `slotsFor` compares each slot start with `now` (so slots on future days always show and slots on past days all hide); `now` is a parameter, no `Date.now` inside. Local time is used for weekdays.
+
+**Status**: ✅ Complete
 
 ---
 
