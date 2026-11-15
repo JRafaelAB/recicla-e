@@ -6,6 +6,7 @@ import { TIPS, type Tip } from '../data/catalog'
 import { LoginScreen, SignupScreen } from '../screens/Auth'
 import { OnboardingScreen, OnboardingSummaryScreen } from '../screens/Onboarding'
 import { HomeMapScreen } from '../screens/HomeMap'
+import { PointDetailScreen, RouteScreen } from '../screens/Point'
 import { MAIN_SCREENS, top, useApp, useClock, type Action, type AppState, type MainScreen, type NavEntry, type ScreenId } from './store'
 
 /** What a screen adapter receives: the live state, dispatch, its nav params and the clock. */
@@ -78,8 +79,15 @@ export const SCREENS: Record<ScreenId, ScreenRenderer> = {
       onOpenPoint={(pointId) => dispatch({ type: 'navigate', screen: 'point', params: { pointId } })}
     />
   ),
-  point: placeholder('point', 'Ponto de coleta'),
-  route: placeholder('route', 'Como chegar'),
+  point: ({ dispatch, params }) => (
+    <PointDetailScreen
+      pointId={params!.pointId!}
+      onBack={() => dispatch({ type: 'back' })}
+      onRoute={() => dispatch({ type: 'navigate', screen: 'route', params: { pointId: params!.pointId! } })}
+      onSchedule={() => dispatch({ type: 'navigate', screen: 'schedule', params: { pointId: params!.pointId! } })}
+    />
+  ),
+  route: ({ dispatch, params }) => <RouteScreen pointId={params!.pointId!} onClose={() => dispatch({ type: 'back' })} />,
   schedule: placeholder('schedule', 'Agendar entrega'),
   celebration: placeholder('celebration', 'Agendamento confirmado'),
   learn: placeholder('learn', 'Aprender'),

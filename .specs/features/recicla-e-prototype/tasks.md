@@ -500,11 +500,15 @@ T26 → T27 → T28
 **Where**: `src/screens/Point.tsx` · **Depends on**: T21 · **Requirement**: PT-01..08 (S10–S11)
 
 **Done when**:
-- [ ] E2e: point 1 shows every field, "Como levar" per sub-type, streams, `tel:` href, fictional label; Como chegar → dashed route; Fechar rota → detail; back → previous screen unchanged
-- [ ] Gate passes: Full
+- [x] E2e: point 1 shows every field, "Como levar" per sub-type, streams, `tel:` href, fictional label; Como chegar → dashed route; Fechar rota → detail; back → previous screen unchanged
+- [x] Gate passes: Full
 
 **Tests**: e2e · **Gate**: full
 **Commit**: `feat(screens): add collection point detail and route view`
+
+**Notes**: `PointDetailScreen({pointId, onBack, onRoute, onSchedule})` and `RouteScreen({pointId, onClose})` in `src/screens/Point.tsx` (no screen-local state). Sub-type chips grouped by category; hours in Mock Data notation (`hoursLabel`: "Seg–Sex 8h–18h", "Sáb 8h–12h", "Seg–Dom 8h–17h"); phone href `tel:+55` + digits; "Como levar" = `GUIDES.comoLevar` per accepted sub-type; "Por que descartar aqui" lists each distinct stream with the accepted sub-types it covers, ⓘ shows the PNRS card. Route: full map with only the point's pin, dashed route, header back and "Fechar rota" both go back. PT-08 e2e also covers the T21 deferred "filters kept after visiting a point". Gate: 241 unit/component + 43 e2e (6 new).
+
+**Status**: ✅ Complete
 
 ---
 
