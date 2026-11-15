@@ -56,11 +56,12 @@ export function impactFor(items: ImpactItem[]): ImpactLine[] {
     .filter((i) => i.qty > 0)
     .flatMap((i) => {
       if (MULTIPLIABLE.some((m) => m.subtypeId === i.subtypeId)) {
-        const label = subtypeOf(i.subtypeId).label
+        // CAT-R5: "Os 2 celulares que você vai entregar contêm cerca de 18 g de cobre".
+        const { singular, plural, gender } = subtypeOf(i.subtypeId).noun
         return quantified(i.subtypeId, i.qty, (contem) =>
           i.qty === 1
-            ? `O item “${label}” que você vai entregar contém ${contem}`
-            : `Os ${i.qty} itens “${label}” que você vai entregar contêm ${contem}`,
+            ? `${gender === 'f' ? 'A' : 'O'} 1 ${singular} que você vai entregar contém ${contem}`
+            : `${gender === 'f' ? 'As' : 'Os'} ${i.qty} ${plural} que você vai entregar contêm ${contem}`,
         )
       }
       return qualitative(i.subtypeId) ?? []

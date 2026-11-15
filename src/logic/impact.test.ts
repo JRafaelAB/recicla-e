@@ -9,15 +9,15 @@ describe('impactFor (SCH-09..11, CAT-R4, CAT-R5)', () => {
     const lines = impactFor([{ subtypeId: 'celular', qty: 2 }])
     const cobre = lines.find((l) => l.text.includes('cobre'))!
     const cobalto = lines.find((l) => l.text.includes('cobalto'))!
-    expect(cobre.text).toContain('contêm cerca de 18 g de cobre')
-    expect(cobre.text).toContain('2')
-    expect(cobalto.text).toContain('contêm cerca de 7 g de cobalto')
+    // CAT-R5 spec example.
+    expect(cobre.text).toBe('Os 2 celulares que você vai entregar contêm cerca de 18 g de cobre')
+    expect(cobalto.text).toBe('Os 2 celulares que você vai entregar contêm cerca de 7 g de cobalto')
     expect(lines.every((l) => l.kind === 'quantified')).toBe(true)
   })
 
   it('quantity of 1 uses the singular verb with the per-unit value', () => {
     const [cobre] = impactFor([{ subtypeId: 'celular', qty: 1 }])
-    expect(cobre.text).toContain('contém cerca de 9 g de cobre')
+    expect(cobre.text).toBe('O 1 celular que você vai entregar contém cerca de 9 g de cobre')
   })
 
   it('1 LED lamp -> no multiplied line, at least one qualitative catalog fact', () => {
@@ -49,9 +49,10 @@ describe('impactFor (SCH-09..11, CAT-R4, CAT-R5)', () => {
   })
 
   it('the CAT-R4 values are scaled: lead in kg, mercury in mg, lead "até"', () => {
-    expect(all(impactFor([{ subtypeId: 'tv-tubo', qty: 3 }]))).toContain('contêm cerca de 5,4 kg de chumbo')
-    expect(all(impactFor([{ subtypeId: 'lampada-fluorescente', qty: 2 }]))).toContain('contêm cerca de 8 mg de mercúrio')
-    expect(all(impactFor([{ subtypeId: 'bateria-automotiva', qty: 2 }]))).toContain('contêm até 16 kg de chumbo')
+    expect(all(impactFor([{ subtypeId: 'tv-tubo', qty: 3 }]))).toBe('As 3 TVs de tubo que você vai entregar contêm cerca de 5,4 kg de chumbo')
+    expect(all(impactFor([{ subtypeId: 'lampada-fluorescente', qty: 2 }]))).toBe('As 2 lâmpadas fluorescentes que você vai entregar contêm cerca de 8 mg de mercúrio')
+    expect(all(impactFor([{ subtypeId: 'bateria-automotiva', qty: 2 }]))).toBe('As 2 baterias automotivas que você vai entregar contêm até 16 kg de chumbo')
+    expect(all(impactFor([{ subtypeId: 'lampada-fluorescente', qty: 1 }]))).toBe('A 1 lâmpada fluorescente que você vai entregar contém cerca de 4 mg de mercúrio')
   })
 
   it('ignores zero quantities', () => {

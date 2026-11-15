@@ -517,11 +517,15 @@ T26 → T27 → T28
 **Where**: `src/screens/Schedule.tsx` · **Depends on**: T22 · **Requirement**: SCH-01..12 (S12–S14)
 
 **Done when**:
-- [ ] E2e (fixed clock): only accepted sub-types listed; stepper bounds; closed days disabled; day change clears the slot; no-slot message; Confirmar disabled until valid; 2 celulares → "cerca de 18 g de cobre" + Fonte + "ao entregar"; LED lamp → no number; back doesn't save
-- [ ] Gate passes: Full
+- [x] E2e (fixed clock): only accepted sub-types listed; stepper bounds; closed days disabled; day change clears the slot; no-slot message; Confirmar disabled until valid; 2 celulares → "cerca de 18 g de cobre" + Fonte + "ao entregar"; LED lamp → no number; back doesn't save
+- [x] Gate passes: Full
 
 **Tests**: e2e · **Gate**: full
 **Commit**: `feat(screens): add drop-off scheduling and impact celebration`
+
+**Notes**: `ScheduleScreen({pointId, now: () => Date, onBack, onConfirm(NewBooking), initialQty?, initialDate?, initialSlot?})` and `CelebrationScreen({booking, onBackToMap})` in `src/screens/Schedule.tsx`. Screen-local state: quantities, selected day (YYYY-MM-DD), the slot list computed when the day was picked (EDGE-04) and the selected slot; the gallery sets them with the `initial*` props (S13: pick a day with no slots, e.g. point 1 on Monday with `now` after 17:00). `now` is a clock function so a re-render driven only by local state reads the current time (found by the EDGE-04 test). The adapter generates the booking id and dispatches `book`; "Voltar ao mapa" dispatches `openMap` with no handoff (NAV-03). Approved fix: sub-types carry pt-BR nouns (`noun: {singular, plural, gender}` in `categories.ts`) and `impactFor` now reads "Os 2 celulares que você vai entregar contêm cerca de 18 g de cobre" / "O 1 celular … contém" (feminine: "As 2 lâmpadas fluorescentes", "A 1 lâmpada fluorescente"); `impact.test.ts` asserts the full spec example strings, `categories.test.ts` asserts the nouns. Spec-precision gap: the spec gives only the masculine example; feminine articles for lâmpada/TV/bateria were chosen by grammar. Gate: 243 unit/component + 54 e2e (11 new).
+
+**Status**: ✅ Complete
 
 ---
 

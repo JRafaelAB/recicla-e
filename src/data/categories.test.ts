@@ -70,3 +70,20 @@ describe('categories', () => {
     }
   })
 })
+
+describe('sub-type nouns (CAT-R5 wording)', () => {
+  it('every sub-type has a singular and plural pt-BR noun', () => {
+    for (const s of SUBTYPES) {
+      expect(s.noun.singular).not.toBe('')
+      expect(s.noun.plural).not.toBe('')
+    }
+  })
+
+  it('the multipliable sub-types use the spec nouns', () => {
+    const noun = (id: string) => SUBTYPES.find((s) => s.id === id)!.noun
+    expect(noun('celular')).toEqual({ singular: 'celular', plural: 'celulares', gender: 'm' })
+    expect(noun('lampada-fluorescente')).toEqual({ singular: 'lâmpada fluorescente', plural: 'lâmpadas fluorescentes', gender: 'f' })
+    expect(noun('tv-tubo')).toEqual({ singular: 'TV de tubo', plural: 'TVs de tubo', gender: 'f' })
+    expect(noun('bateria-automotiva')).toEqual({ singular: 'bateria automotiva', plural: 'baterias automotivas', gender: 'f' })
+  })
+})
