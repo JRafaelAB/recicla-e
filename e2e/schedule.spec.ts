@@ -125,7 +125,7 @@ test('SCH-07..11: booking 2 celulares saves it and shows the celebration with su
   const summary = cel(page).getByTestId('cel-summary')
   await expect(summary).toContainText('Coleta Verde Savassi')
   await expect(summary).toContainText('Ter, 17/11 às 09:00')
-  await expect(summary).toContainText('2 × Celular')
+  await expect(summary).toContainText('2 celulares')
 
   const impact = cel(page).getByTestId('cel-impact')
   await expect(impact).toContainText('Ao entregar, você vai')

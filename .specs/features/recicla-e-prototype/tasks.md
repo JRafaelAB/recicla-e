@@ -585,11 +585,13 @@ T26 → T27 → T28
 **Where**: `src/gallery/Gallery.tsx` · **Depends on**: T26 · **Requirement**: GAL-01, GAL-02
 
 **Done when**:
-- [ ] E2e: `dist/gallery.html` offline shows 18 frames captioned "S# — name", each 390×844
-- [ ] Gate passes: Full
+- [x] E2e: `dist/gallery.html` offline shows 18 frames captioned "S# — name", each 390×844
+- [x] Gate passes: Full
 
 **Tests**: e2e · **Gate**: full
 **Commit**: `feat(gallery): add static screen gallery page`
+
+**Status**: ✅ Complete
 
 ---
 

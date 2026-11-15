@@ -168,7 +168,7 @@ export function CelebrationScreen({ booking, onBackToMap }: CelebrationProps) {
         <p className="cel-when"><span aria-hidden="true">📅</span> {dayLabel(fromIso(booking.date))} às {booking.slot}</p>
         <ul className="cel-items">
           {booking.items.map((i) => (
-            <li key={i.subtypeId}><span aria-hidden="true">{subtypeOf(i.subtypeId).emoji}</span> {i.qty} × {subtypeOf(i.subtypeId).label}</li>
+            <li key={i.subtypeId}><span aria-hidden="true">{subtypeOf(i.subtypeId).emoji}</span> {i.qty} {i.qty === 1 ? subtypeOf(i.subtypeId).noun.singular : subtypeOf(i.subtypeId).noun.plural}</li>
           ))}
         </ul>
       </div>

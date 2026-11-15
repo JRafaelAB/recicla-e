@@ -10,11 +10,14 @@ import { CATEGORIES, type CategoryId } from '../data/categories'
 import { TIPS } from '../data/catalog'
 import { validateLogin } from '../logic/auth'
 import type { Booking } from '../logic/storage'
+import type { MainScreen } from '../app/store'
 
 export interface Fixture {
   id: string
   name: string
   render: () => ReactNode
+  /** Main screens show the bottom tab bar with this tab active. */
+  tab?: MainScreen
 }
 
 /** Fixed gallery clock: Monday 2026-11-16 10:00 (local time). */
@@ -63,9 +66,9 @@ export const FIXTURES: Fixture[] = [
     render: () => <OnboardingSummaryScreen answers={answers(['celulares', 'pilhas'])} onGoToMap={noop} />,
   },
   { id: 'S6', name: 'Onboarding summary, no devices', render: () => <OnboardingSummaryScreen answers={answers([])} onGoToMap={noop} /> },
-  { id: 'S7', name: 'Home map, default, with mascot tip balloon', render: () => home({ categories: [], query: '' }, TIPS[0]) },
-  { id: 'S8', name: 'Home map, filtered by a category', render: () => home({ categories: ['linhabranca'], query: '' }, null) },
-  { id: 'S9', name: 'Home map, no results', render: () => home({ categories: [], query: 'xyz' }, null) },
+  { id: 'S7', tab: 'home', name: 'Home map, default, with mascot tip balloon', render: () => home({ categories: [], query: '' }, TIPS[0]) },
+  { id: 'S8', tab: 'home', name: 'Home map, filtered by a category', render: () => home({ categories: ['linhabranca'], query: '' }, null) },
+  { id: 'S9', tab: 'home', name: 'Home map, no results', render: () => home({ categories: [], query: 'xyz' }, null) },
   {
     id: 'S10',
     name: 'Point detail',
@@ -85,15 +88,15 @@ export const FIXTURES: Fixture[] = [
     render: () => <ScheduleScreen pointId={1} now={MONDAY_EVENING} onBack={noop} onConfirm={noop} initialDate="2026-11-16" />,
   },
   { id: 'S14', name: 'Celebration / impact after booking', render: () => <CelebrationScreen booking={booking} onBackToMap={noop} /> },
-  { id: 'S15', name: 'Aprender list', render: () => <LearnScreen onOpenCategory={noop} /> },
+  { id: 'S15', tab: 'learn', name: 'Aprender list', render: () => <LearnScreen onOpenCategory={noop} /> },
   { id: 'S16', name: 'Device page (Aprender detail)', render: () => <DeviceScreen categoryId="lampadas" onBack={noop} onSeePoints={noop} /> },
   {
-    id: 'S17',
+    id: 'S17', tab: 'profile',
     name: 'Perfil, no bookings',
     render: () => <ProfileScreen name="Ana" bookings={[]} onOpenMap={noop} onLogout={noop} onReset={noop} />,
   },
   {
-    id: 'S18',
+    id: 'S18', tab: 'profile',
     name: 'Perfil with bookings',
     render: () => <ProfileScreen name="Ana" bookings={[booking, lampBooking]} onOpenMap={noop} onLogout={noop} onReset={noop} />,
   },
