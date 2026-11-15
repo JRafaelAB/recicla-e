@@ -98,7 +98,7 @@ T26 → T27 → T28
 
 **Versions**: latest majors work together; no pins needed (vite 8.3.8, @vitejs/plugin-react 6.3.0, react 19.3.1, vite-plugin-singlefile 2.3.4, vitest 5.1.0, @playwright/test 1.65.1, typescript 7.0.2, @testing-library/react 16.3.3, jsdom 31.0.1). Notes: Vitest 5 has no `environmentMatchGlobs`, so `vite.config.ts` uses two `test.projects` (`unit` = node for `*.test.ts`, `dom` = jsdom for `*.test.tsx`). jsdom 31 declares Node ≥22.22.2 and the machine runs 22.17.1; npm warns but a jsdom render probe passed. `test:unit` uses `--passWithNoTests` so the gate runs before the first unit test exists.
 
-**Status**: ✅ Complete (this commit)
+**Status**: ✅ Complete (commit 02f2418)
 
 ---
 
@@ -110,12 +110,14 @@ T26 → T27 → T28
 **Requirement**: SCALE-02
 
 **Done when**:
-- [ ] Tests assert all 14 sub-type levels and the 8 category levels (2,5,4,4,3,4,3,1) exactly as in the spec
-- [ ] Power bank is listed under `bateria-litio`
-- [ ] Gate passes: Quick
+- [x] Tests assert all 14 sub-type levels and the 8 category levels (2,5,4,4,3,4,3,1) exactly as in the spec
+- [x] Power bank is listed under `bateria-litio`
+- [x] Gate passes: Quick
 
 **Tests**: unit · **Gate**: quick
 **Commit**: `feat(data): add device categories and sub-types with danger levels`
+
+**Status**: ✅ Complete (this commit)
 
 ---
 
