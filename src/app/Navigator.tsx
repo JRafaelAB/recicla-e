@@ -1,6 +1,7 @@
 import type { Dispatch, ReactNode } from 'react'
 import { PhoneFrame } from '../components/PhoneFrame'
 import { TabBar } from '../components/ui'
+import { LoginScreen, SignupScreen } from '../screens/Auth'
 import { MAIN_SCREENS, top, useApp, useClock, type Action, type AppState, type MainScreen, type NavEntry, type ScreenId } from './store'
 
 /** What a screen adapter receives: the live state, dispatch, its nav params and the clock. */
@@ -24,8 +25,18 @@ const placeholder = (id: ScreenId, title: string): ScreenRenderer => () => (
  * the store to the screen component's props (screens stay pure for the gallery).
  */
 export const SCREENS: Record<ScreenId, ScreenRenderer> = {
-  login: placeholder('login', 'Entrar'),
-  signup: placeholder('signup', 'Criar conta'),
+  login: ({ dispatch }) => (
+    <LoginScreen
+      onLogin={(email) => dispatch({ type: 'login', email })}
+      onCreateAccount={() => dispatch({ type: 'navigate', screen: 'signup' })}
+    />
+  ),
+  signup: ({ dispatch }) => (
+    <SignupScreen
+      onSignup={(nome, email) => dispatch({ type: 'signup', nome, email })}
+      onHaveAccount={() => dispatch({ type: 'back' })}
+    />
+  ),
   onboarding: placeholder('onboarding', 'Onboarding'),
   onboardingSummary: placeholder('onboardingSummary', 'Resumo do onboarding'),
   home: placeholder('home', 'Mapa'),

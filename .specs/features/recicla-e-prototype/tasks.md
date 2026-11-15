@@ -449,11 +449,15 @@ T26 → T27 → T28
 **Where**: `src/screens/Auth.tsx` · **Depends on**: T18 · **Requirement**: AUTH-01..11 (S1–S3)
 
 **Done when**:
-- [ ] E2e: each error message; valid login → onboarding; sign up "Ana" → onboarding; "Já tenho conta" returns; reload stays logged in
-- [ ] Gate passes: Full
+- [x] E2e: each error message; valid login → onboarding; sign up "Ana" → onboarding; "Já tenho conta" returns; reload stays logged in
+- [x] Gate passes: Full
 
 **Tests**: e2e · **Gate**: full
 **Commit**: `feat(screens): add login and sign-up`
+
+**Notes**: Pure `LoginScreen`/`SignupScreen` in `src/screens/Auth.tsx` keep form state locally and validate with `logic/auth`; adapters dispatch `login`/`signup`, "Criar conta" navigates to signup, "Já tenho conta" goes back. Gallery props: `initialEmail/initialPassword/initialErrors` (and `initialNome` on signup) render S2 with errors shown. Errors are linked to their input with `aria-describedby` ("under the field"). Shared `ScreenHeader`/`SectionTitle` in `src/screens/common.tsx`; e2e helpers in `e2e/helpers.ts` (seed once per test so reloads keep app state, `fixClock` = Mon 2026-11-16 10:00). Gate: 240 unit/component + 17 e2e (10 new).
+
+**Status**: ✅ Complete
 
 ---
 
