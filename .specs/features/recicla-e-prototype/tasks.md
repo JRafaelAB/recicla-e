@@ -252,11 +252,15 @@ T26 → T27 → T28
 **Requirement**: SCH-09..11, PROF-06, PROF-07
 
 **Done when**:
-- [ ] Tests: 2 celulares → "cerca de 18 g de cobre", "cerca de 7 g de cobalto"; 1 LED lamp → no multiplied line, ≥1 qualitative fact; 2 celulares + 1 fluorescente summed → cobre 18 g, cobalto 7 g, mercúrio 4 mg; wording contains "contêm" and never "recuperou"/"evitou"
-- [ ] Gate passes: Quick
+- [x] Tests: 2 celulares → "cerca de 18 g de cobre", "cerca de 7 g de cobalto"; 1 LED lamp → no multiplied line, ≥1 qualitative fact; 2 celulares + 1 fluorescente summed → cobre 18 g, cobalto 7 g, mercúrio 4 mg; wording contains "contêm" and never "recuperou"/"evitou"
+- [x] Gate passes: Quick
 
 **Tests**: unit · **Gate**: quick
 **Commit**: `feat(logic): add sourced potential-impact calculation`
+
+**Notes**: Returns `ImpactLine` objects (kind, subtypeId, categoryId, factId, text, sourceId, researchRef); `sumImpact` returns `{totals, qualitative}` (totals grouped per sub-type value, qualitative = one fact per booked category for PROF-07). Quantity scaling (mg/g/kg) is private here and moves to `format.ts` in T12.
+
+**Status**: ✅ Complete
 
 ---
 
