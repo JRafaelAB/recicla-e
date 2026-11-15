@@ -192,11 +192,15 @@ T26 → T27 → T28
 **Requirement**: ONB-09, EDGE-02
 
 **Done when**:
-- [ ] Tests: celulares → 1, pilhas → 1, linhabranca → 5, tvs → 2, lampadas → 1, computadores → 2
-- [ ] Gate passes: Quick
+- [x] Tests: celulares → 1, pilhas → 1, linhabranca → 5, tvs → 2, lampadas → 1, computadores → 2
+- [x] Gate passes: Quick
 
 **Tests**: unit · **Gate**: quick
 **Commit**: `feat(logic): add nearest accepting point lookup`
+
+**Notes**: Second arg `points` defaults to `POINTS`.
+
+**Status**: ✅ Complete
 
 ---
 
