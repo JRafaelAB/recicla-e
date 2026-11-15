@@ -13,7 +13,8 @@
 
 - **Feature:** recicla-e-prototype
 - **Phase:** Done. T1–T28 complete; Verifier PASS (validation.md, iteration 2).
-- **Commits:** 02f2418..HEAD on local `master`; nothing pushed, no remote.
+- **Repo:** https://github.com/JRafaelAB/recicla-e (public; local `master` tracks `origin/main`).
+- **Hosting:** GitHub Pages from the `gh-pages` branch (built files only) — https://jrafaelab.github.io/recicla-e/ and /gallery.html. To redeploy: `npm run build`, then push `dist/index.html`, `dist/gallery.html` and `.nojekyll` to `gh-pages`. The `.github/workflows/pages.yml` workflow cannot run while the GitHub account has a billing lock.
 - **Deliverables:** `npm run build` → `dist/index.html`, `dist/gallery.html`.
 - **Open (non-blocking):** mascot-tip Fonte and onboarding-card fact not asserted in e2e; INFO-05 e2e only on Lâmpadas; html.to.design import to be checked manually by the user; jsdom wants Node ≥22.22.2 (machine has 22.17.1).
 - **Uncommitted:** `.screens/` (local screenshots).
