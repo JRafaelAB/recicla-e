@@ -10,7 +10,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 
 **Spec**: `.specs/features/recicla-e-prototype/spec.md` (rev. 3 + AD-001)
 **Design**: `.specs/features/recicla-e-prototype/design.md`
-**Status**: Draft
+**Status**: Done (Verifier PASS after fix iteration 1; see validation.md)
 
 ---
 
